@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dulcería Rey del dulce</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="barra-superior">¡Los dulces más frescos de la ciudad! 🍭</div>
+        <div class="cabecera-principal">
+           
+            <h1 class="logo">Rey del <span>dulce</span></h1>
+            
+            
+            <nav>
+    <ul class="menu-principal">
+        <li><a href="#inicio">Inicio</a></li>
+        
+        <li class="item-desplegable">
+            <a href="#">Categorías ▾</a>
+            <ul class="submenu">
+                <li><a href="#" class="filtro-menu" data-categoria="chocolates">Chocolate</a></li>
+                <li><a href="#" class="filtro-menu" data-categoria="caramelo">Caramelo</a></li>
+                <li><a href="#" class="filtro-menu" data-categoria="paletas">Paletas</a></li>
+                <li><a href="#" class="filtro-menu" data-categoria="galletas">Galletas</a></li>
+                <li><a href="#" class="filtro-menu" data-categoria="dia_del_nino">Dulces con juguete</a></li>
+                <li><a href="#" class="filtro-menu" data-categoria="otros">Botanas</a></li>
+                <li><a href="#" class="filtro-menu" data-categoria="caramelo">Caramelo</a></li>
+                <li><a href="#" class="filtro-menu" data-categoria="chicle">Chicle</a></li>
+                <li><a href="#" class="filtro-menu" data-categoria="dulces_regionales">Polvitos</a></li>
+            </ul>
+        </li>
+
+        <li class="item-desplegable">
+            <a href="#">Temporadas ▾</a>
+            <ul class="submenu">
+                <li><a href="#" class="filtro-menu" data-categoria="san_valentin">San Valentín</a></li>
+                <li><a href="#" class="filtro-menu" data-categoria="halloween">Halloween</a></li>
+                <li><a href="#" class="filtro-menu" data-categoria="navidad">Navidad</a></li>
+                <li><a href="#" class="filtro-menu" data-categoria="anio_nuevo">Año Nuevo</a></li>
+                <li><a href="#" class="filtro-menu" data-categoria="dia_de_reyes">Día de Reyes</a></li>
+                <li><a href="#" class="filtro-menu" data-categoria="dia_del_nino">Día del Niño</a></li>
+            </ul>
+        </li>
+
+        <li class="item-desplegable">
+            <a href="#">Marcas ▾</a>
+            <ul class="submenu">
+                <li><a href="#" class="filtro-marca" data-marca="Ferrero">Ferrero Rocher</a></li>
+                <li><a href="#" class="filtro-marca" data-marca="Kinder">Kinder</a></li>
+                <li><a href="#" class="filtro-marca" data-marca="Hershey">Hershey's</a></li>
+                <li><a href="#" class="filtro-marca" data-marca="Carlos V">Carlos V</a></li>
+                <li><a href="#" class="filtro-marca" data-marca="Mazapán">De la Rosa</a></li>
+                <li><a href="#" class="filtro-marca" data-marca="Ricolino">Ricolino</a></li>
+                <li><a href="#" class="filtro-marca" data-marca="Rockaleta">Vero</a></li>
+                <li><a href="#" class="filtro-marca" data-marca="Skittles">Sonrics</a></li>
+                <li><a href="#" class="filtro-marca" data-marca="Snickers">Mars</a></li>
+                <li><a href="#" class="filtro-marca" data-marca="Crunch">Nestlé</a></li>
+            </ul>
+        </li>
+
+        <li><a href="#" id="ver-todos">Ver todos</a></li>
+    </ul>
+</nav>
+
+           
+            <div class="contenedor-iconos">
+
+                <!-- BOTÓN USUARIO -->
+<div class="icono-usuario" id="boton-usuario">
+  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+  </svg>
+  <span id="nombre-usuario"></span>
+</div>
+                
+                <!-- BUSCADOR -->
+                <div class="caja-busqueda">
+                    <input type="text" id="input-busqueda" class="campo-texto-buscar" placeholder="Buscar dulce...">
+                    <div class="icono-lupa" id="boton-buscar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- CARRITO -->
+                <div class="icono-carrito" id="boton-abrir-carrito">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                    <span id="contador-carrito">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    
+    <div class="fondo-oscuro-carrito" id="fondo-carrito">
+        <div class="ventana-carrito">
+            <div class="encabezado-carrito">
+                <h3>Carrito </h3>
+                <button id="boton-cerrar-carrito" class="btn-cerrar">&times;</button>
+            </div>
+            
+            <div id="contenedor-items-carrito" class="cuerpo-carrito">
+                <p class="mensaje-vacio">Tu carrito está vacío.</p>
+            </div>
+
+            <div class="pie-carrito">
+                <div class="fila-total">
+                    <span>Total:</span>
+                    <span>$<span id="precio-total-carrito">0.00</span></span>
+                </div>
+                <button class="btn-pagar" id="btn-pagar">Pagar Ahora</button>
+                <button id="boton-vaciar-carrito" class="btn-vaciar">Vaciar Carrito</button>
+            </div>
+        </div>
+    </div>
+
+    <main class="contenedor-principal">
+        <div class="contenido-completo">
+            
+            
+            <main class="contenedor-principal">
+        <div class="contenido-completo">
+            
+            
+            <section id="inicio" class="hero">
+                <div class="hero-texto">
+                    <h2>Bienvenido</h2>
+                    <p>En Rey del dulce encontrarás una gran variedad de productos para toda ocasión.</p>
+                </div>
+                
+                <img class="imagen-inicio" src="/imagenes/imagen  principal  dulceria.webp" alt="Dulces">
+                
+
+            <!-- Javas pone los productos en la pagina -->
+            <div id="contenedor-dinamico-productos"></div>
+
+        </div>
+    </main>
+            
+            
+
+        </div>
+    </main>
+
+    <!-- MODAL LOGIN/REGISTRO -->
+<div class="fondo-modal" id="fondo-modal">
+  <div class="ventana-modal">
+    
+    <!-- Botones para cambiar entre login y registro -->
+    <div class="tabs-modal">
+      <button class="tab-btn activo" id="tab-login">Iniciar Sesión</button>
+      <button class="tab-btn" id="tab-registro">Registrarse</button>
+      <button class="btn-cerrar-modal" id="cerrar-modal">&times;</button>
+    </div>
+
+    <!-- Formulario Login -->
+    <div id="form-login" class="formulario-modal">
+      <h3>¡Bienvenido de vuelta!</h3>
+      <input type="email" id="login-email" placeholder="Correo electrónico">
+      <input type="password" id="login-password" placeholder="Contraseña">
+      <button class="btn-modal-submit" id="btn-login">Entrar</button>
+      <p id="error-login" class="mensaje-error"></p>
+    </div>
+
+    <!-- Formulario Registro -->
+    <div id="form-registro" class="formulario-modal" style="display:none">
+      <h3>Crear cuenta</h3>
+      <input type="text" id="registro-nombre" placeholder="Tu nombre">
+      <input type="email" id="registro-email" placeholder="Correo electrónico">
+      <input type="password" id="registro-password" placeholder="Contraseña">
+      <button class="btn-modal-submit" id="btn-registro">Crear cuenta</button>
+      <p id="error-registro" class="mensaje-error"></p>
+    </div>
+
+  </div>
+</div>
+
+
+<footer class="footer">
+  <div class="footer-contenido">
+
+    <!-- Logo y descripción -->
+    <div class="footer-seccion">
+      <h3 class="footer-logo">Rey del <span>dulce</span></h3>
+      <p>Los dulces más frescos y deliciosos de la ciudad. ¡Endulzamos tu vida!</p>
+      <div class="footer-redes">
+        <!-- Facebook -->
+        <a href="#" class="red-social">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+          </svg>
+        </a>
+        <!-- Instagram -->
+        <a href="#" class="red-social">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <circle cx="12" cy="12" r="4"/>
+            <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+          </svg>
+        </a>
+        <!-- WhatsApp -->
+        <a href="#" class="red-social">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.855L.057 23.428a.75.75 0 0 0 .916.916l5.573-1.471A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22a9.943 9.943 0 0 1-5.073-1.389l-.363-.214-3.761.993.993-3.761-.214-.363A9.943 9.943 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Enlaces rápidos -->
+    <div class="footer-seccion">
+      <h4>Enlaces rápidos</h4>
+      <ul class="footer-links">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#" class="filtro-menu" data-categoria="chocolates">Chocolates</a></li>
+        <li><a href="#" class="filtro-menu" data-categoria="gomitas">Gomitas</a></li>
+        <li><a href="#" class="filtro-menu" data-categoria="paletas">Paletas</a></li>
+        <li><a href="#" class="filtro-menu" data-categoria="dulces_regionales">Dulces Regionales</a></li>
+      </ul>
+    </div>
+
+    <!-- Temporadas -->
+    <div class="footer-seccion">
+      <h4>Temporadas</h4>
+      <ul class="footer-links">
+        <li><a href="#" class="filtro-menu" data-categoria="san_valentin">San Valentín</a></li>
+        <li><a href="#" class="filtro-menu" data-categoria="halloween">Halloween</a></li>
+        <li><a href="#" class="filtro-menu" data-categoria="navidad">Navidad</a></li>
+        <li><a href="#" class="filtro-menu" data-categoria="anio_nuevo">Año Nuevo</a></li>
+        <li><a href="#" class="filtro-menu" data-categoria="dia_de_reyes">Día de Reyes</a></li>
+      </ul>
+    </div>
+
+    <!-- Contacto -->
+    <div class="footer-seccion">
+      <h4>Contacto</h4>
+      <ul class="footer-links">
+        <li>Monterrey, Nuevo León</li>
+        <li>81 1234 5678</li>
+        <li>contacto@reydeldulce.mx</li>
+        <li>Lun - Sab: 9am - 8pm</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="footer-inferior">
+    <p>© 2026 Rey del Dulce. Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

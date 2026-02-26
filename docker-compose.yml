@@ -1,0 +1,33 @@
+
+
+services:
+
+  # servidor Node.js
+  app:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - MONGO_URI=mongodb://mongo:27017/dulceria
+      - JWT_SECRET=mi_clave_super_secreta_dulceria_2024
+    depends_on:
+      - mongo
+    volumes:
+      - .:/app
+      - /app/node_modules
+  #porno
+
+  # Base de datos MongoDB
+  mongo:
+    image: mongo:6
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
+
+
+
