@@ -1,4 +1,4 @@
-const API = 'http://localhost:5000/api';
+const API = 'https://dulceria-backend-production.up.railway.app/api';
 
 // CARGAR PRODUCTOS DESDE EL BACKEND 
 async function cargarProductos() {
@@ -167,7 +167,7 @@ botonLupa.addEventListener('click', () => {
 });
 
 // --- AUTENTICACIÓN ---
-const API_AUTH = 'http://localhost:5000/api';
+const API_AUTH = 'https://dulceria-backend-production.up.railway.app/api';
 const fondoModal = document.getElementById('fondo-modal');
 const botonUsuario = document.getElementById('boton-usuario');
 const cerrarModal = document.getElementById('cerrar-modal');

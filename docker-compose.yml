@@ -16,7 +16,7 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
-  #porno
+  
 
   # Base de datos MongoDB
   mongo:
