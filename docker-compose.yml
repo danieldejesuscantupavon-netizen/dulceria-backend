@@ -9,8 +9,9 @@ services:
       - "5000:5000"
     environment:
       - PORT=5000
-      - MONGO_URI=mongodb://mongo:27017/dulceria
+      - MONGODB_URI=mongodb://mongo:27017/dulceria
       - JWT_SECRET=mi_clave_super_secreta_dulceria_2024
+      - ALLOWED_ORIGINS=http://localhost:3000
     depends_on:
       - mongo
     volumes:

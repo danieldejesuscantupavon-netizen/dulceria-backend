@@ -81,7 +81,8 @@ const productos = [
 
 async function cargarDatos() {
     try {
-        await mongoose.connect(process.env.MONGO_URI);
+        const mongoUri = process.env.MONGODB_URI || process.env.MONGO_URI;
+        await mongoose.connect(mongoUri);
         console.log('Conectado a MongoDB');
         await Product.deleteMany({});
         console.log('Productos anteriores eliminados');
