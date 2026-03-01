@@ -1,4 +1,4 @@
-const API = 'https://dulceria-backend.onrender.com/api';
+const API = `${window.location.origin}/api`;
 
 // CARGAR PRODUCTOS DESDE EL BACKEND 
 async function cargarProductos() {
@@ -167,7 +167,6 @@ botonLupa.addEventListener('click', () => {
 });
 
 // --- AUTENTICACIÓN ---
-const API_AUTH = 'https://dulceria-backend.onrender.com/api';
 const fondoModal = document.getElementById('fondo-modal');
 const botonUsuario = document.getElementById('boton-usuario');
 const cerrarModal = document.getElementById('cerrar-modal');
@@ -218,7 +217,7 @@ document.getElementById('btn-login').addEventListener('click', async () => {
   const errorEl = document.getElementById('error-login');
 
   try {
-    const res = await fetch(`${API_AUTH}/auth/login`, {
+    const res = await fetch(`${API}/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password })
@@ -250,7 +249,7 @@ document.getElementById('btn-registro').addEventListener('click', async () => {
   const errorEl = document.getElementById('error-registro');
 
   try {
-    const res = await fetch(`${API_AUTH}/auth/registro`, {
+    const res = await fetch(`${API}/auth/registro`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ nombre, email, password })
@@ -279,6 +278,11 @@ window.addEventListener('load', () => {
   const usuario = JSON.parse(localStorage.getItem('usuario'));
   if (usuario) {
     nombreUsuarioSpan.textContent = usuario.nombre;
+  }
+  const carritoGuardado = JSON.parse(localStorage.getItem('carrito') || '[]');
+  if (Array.isArray(carritoGuardado)) {
+    carritoDeCompras = carritoGuardado;
+    actualizarInterfazCarrito();
   }
 });
 
@@ -311,7 +315,7 @@ document.getElementById('btn-pagar').addEventListener('click', async () => {
       cantidad: item.cantidad
     }));
 
-    const res = await fetch('http://localhost:5000/api/orders', {
+    const res = await fetch(`${API}/orders`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -449,3 +453,10 @@ function renderizarFiltrados(productos, titulo) {
   // Scroll suave hacia los productos
   seccion.scrollIntoView({ behavior: 'smooth' });
 }
+
+// Persistir carrito en almacenamiento local
+const originalActualizarInterfazCarrito = actualizarInterfazCarrito;
+actualizarInterfazCarrito = function actualizarInterfazConPersistencia() {
+  originalActualizarInterfazCarrito();
+  localStorage.setItem('carrito', JSON.stringify(carritoDeCompras));
+};

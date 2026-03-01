@@ -8,6 +8,12 @@ const auth = require('../middleware/auth');
 router.post('/', auth, async (req, res) => {
   try {
     const { productos, direccionEntrega } = req.body;
+    if (!Array.isArray(productos) || productos.length === 0) {
+      return res.status(400).json({ mensaje: 'Debes enviar una lista de productos valida' });
+    }
+    if (!direccionEntrega || typeof direccionEntrega !== 'string') {
+      return res.status(400).json({ mensaje: 'Debes enviar una direccion de entrega valida' });
+    }
 
     let total = 0;
     const productosDetalle = [];
