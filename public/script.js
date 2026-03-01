@@ -240,8 +240,8 @@ if (tabLogin && tabRegistro && formLogin && formRegistro) {
 const btnLogin = document.getElementById('btn-login');
 if (btnLogin) {
   btnLogin.addEventListener('click', async () => {
-  const email = document.getElementById('login-email').value;
-  const password = document.getElementById('login-password').value;
+  const email = document.getElementById('login-email').value.trim();
+  const password = document.getElementById('login-password').value.trim();
   const errorEl = document.getElementById('error-login');
 
   try {
@@ -274,9 +274,9 @@ if (btnLogin) {
 const btnRegistro = document.getElementById('btn-registro');
 if (btnRegistro) {
   btnRegistro.addEventListener('click', async () => {
-  const nombre = document.getElementById('registro-nombre').value;
-  const email = document.getElementById('registro-email').value;
-  const password = document.getElementById('registro-password').value;
+  const nombre = document.getElementById('registro-nombre').value.trim();
+  const email = document.getElementById('registro-email').value.trim();
+  const password = document.getElementById('registro-password').value.trim();
   const errorEl = document.getElementById('error-registro');
 
   try {

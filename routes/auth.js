@@ -10,8 +10,9 @@ router.post('/registro', async (req, res) => {
     const { nombre, email, password } = req.body;
     const nombreNormalizado = (nombre || '').trim();
     const emailNormalizado = (email || '').trim().toLowerCase();
+    const passwordNormalizado = String(password || '').trim();
 
-    if (!nombreNormalizado || !emailNormalizado || !password) {
+    if (!nombreNormalizado || !emailNormalizado || !passwordNormalizado) {
       return res.status(400).json({ mensaje: 'Nombre, email y contrasena son obligatorios' });
     }
 
@@ -23,7 +24,7 @@ router.post('/registro', async (req, res) => {
 
     // Encriptar la contrasena
     const salt = await bcrypt.genSalt(10);
-    const passwordEncriptado = await bcrypt.hash(password, salt);
+    const passwordEncriptado = await bcrypt.hash(passwordNormalizado, salt);
 
     const usuario = new User({
       nombre: nombreNormalizado,
@@ -59,8 +60,9 @@ router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
     const emailNormalizado = (email || '').trim().toLowerCase();
+    const passwordNormalizado = String(password || '').trim();
 
-    if (!emailNormalizado || !password) {
+    if (!emailNormalizado || !passwordNormalizado) {
       return res.status(400).json({ mensaje: 'Email y contrasena son obligatorios' });
     }
 
@@ -71,7 +73,14 @@ router.post('/login', async (req, res) => {
     }
 
     // Comparar la contrasena con la encriptada
-    const passwordValido = await bcrypt.compare(password, usuario.password);
+    let passwordValido = await bcrypt.compare(passwordNormalizado, usuario.password);
+    if (!passwordValido && usuario.password === passwordNormalizado) {
+      // Compatibilidad con cuentas antiguas que pudieron guardarse sin hash.
+      const salt = await bcrypt.genSalt(10);
+      usuario.password = await bcrypt.hash(passwordNormalizado, salt);
+      await usuario.save();
+      passwordValido = true;
+    }
     if (!passwordValido) {
       return res.status(400).json({ mensaje: 'Email o contrasena incorrectos' });
     }
