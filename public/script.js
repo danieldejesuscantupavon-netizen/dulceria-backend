@@ -1,4 +1,8 @@
-const API = `${window.location.origin}/api`;
+const DEFAULT_API_ORIGIN = 'https://dulceria-backend-2.onrender.com';
+const API_ORIGIN = window.location.origin.includes('onrender.com')
+  ? window.location.origin
+  : DEFAULT_API_ORIGIN;
+const API = `${API_ORIGIN}/api`;
 
 // CARGAR PRODUCTOS DESDE EL BACKEND 
 async function cargarProductos() {
@@ -7,6 +11,7 @@ async function cargarProductos() {
     const productos = await respuesta.json();
 
     const contenedor = document.getElementById('contenedor-dinamico-productos');
+    if (!contenedor) return;
     contenedor.innerHTML = '';
 
     if (productos.length === 0) {
@@ -89,13 +94,20 @@ const botonVaciar = document.getElementById('boton-vaciar-carrito');
 
 let carritoDeCompras = [];
 
-botonAbrirCarrito.addEventListener('click', () => fondoCarrito.classList.add('activo'));
-botonCerrarCarrito.addEventListener('click', () => fondoCarrito.classList.remove('activo'));
-fondoCarrito.addEventListener('click', (e) => {
-  if (e.target === fondoCarrito) fondoCarrito.classList.remove('activo');
-});
+if (botonAbrirCarrito && fondoCarrito) {
+  botonAbrirCarrito.addEventListener('click', () => fondoCarrito.classList.add('activo'));
+}
+if (botonCerrarCarrito && fondoCarrito) {
+  botonCerrarCarrito.addEventListener('click', () => fondoCarrito.classList.remove('activo'));
+}
+if (fondoCarrito) {
+  fondoCarrito.addEventListener('click', (e) => {
+    if (e.target === fondoCarrito) fondoCarrito.classList.remove('activo');
+  });
+}
 
 function actualizarInterfazCarrito() {
+  if (!contenedorItems || !precioTotalElemento || !contadorCarritoElemento) return;
   contenedorItems.innerHTML = '';
   let totalDinero = 0;
   let totalCantidad = 0;
@@ -143,28 +155,34 @@ carritoDeCompras.push({ id: idProd, nombre: nombreProd, precio: precioProd, cant
   }
 });
 
-botonVaciar.addEventListener('click', () => {
-  carritoDeCompras = [];
-  actualizarInterfazCarrito();
-});
+if (botonVaciar) {
+  botonVaciar.addEventListener('click', () => {
+    carritoDeCompras = [];
+    actualizarInterfazCarrito();
+  });
+}
 
 // --- BUSCADOR ---
 const inputBusqueda = document.getElementById('input-busqueda');
 const botonLupa = document.getElementById('boton-buscar');
 const cajaBusqueda = document.querySelector('.caja-busqueda');
 
-inputBusqueda.addEventListener('input', (e) => {
-  const texto = e.target.value.toLowerCase();
-  document.querySelectorAll('.tarjeta-producto').forEach(tarjeta => {
-    const nombre = tarjeta.querySelector('h3').innerText.toLowerCase();
-    tarjeta.classList.toggle('producto-oculto', !nombre.includes(texto));
+if (inputBusqueda) {
+  inputBusqueda.addEventListener('input', (e) => {
+    const texto = e.target.value.toLowerCase();
+    document.querySelectorAll('.tarjeta-producto').forEach(tarjeta => {
+      const nombre = tarjeta.querySelector('h3').innerText.toLowerCase();
+      tarjeta.classList.toggle('producto-oculto', !nombre.includes(texto));
+    });
   });
-});
+}
 
-botonLupa.addEventListener('click', () => {
-  cajaBusqueda.classList.toggle('activo');
-  if (cajaBusqueda.classList.contains('activo')) inputBusqueda.focus();
-});
+if (botonLupa && cajaBusqueda && inputBusqueda) {
+  botonLupa.addEventListener('click', () => {
+    cajaBusqueda.classList.toggle('activo');
+    if (cajaBusqueda.classList.contains('activo')) inputBusqueda.focus();
+  });
+}
 
 // --- AUTENTICACIÓN ---
 const fondoModal = document.getElementById('fondo-modal');
@@ -177,41 +195,51 @@ const formRegistro = document.getElementById('form-registro');
 const nombreUsuarioSpan = document.getElementById('nombre-usuario');
 
 // Abrir y cerrar modal
-botonUsuario.addEventListener('click', () => {
-  const token = localStorage.getItem('token');
-  if (token) {
-    // Si ya está logueado, cerrar sesión
-    localStorage.removeItem('token');
-    localStorage.removeItem('usuario');
-    nombreUsuarioSpan.textContent = '';
-    alert('Sesión cerrada');
-  } else {
-    fondoModal.classList.add('activo');
-  }
-});
+if (botonUsuario && fondoModal) {
+  botonUsuario.addEventListener('click', () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      // Si ya está logueado, cerrar sesión
+      localStorage.removeItem('token');
+      localStorage.removeItem('usuario');
+      if (nombreUsuarioSpan) nombreUsuarioSpan.textContent = '';
+      alert('Sesión cerrada');
+    } else {
+      fondoModal.classList.add('activo');
+    }
+  });
+}
 
-cerrarModal.addEventListener('click', () => fondoModal.classList.remove('activo'));
-fondoModal.addEventListener('click', (e) => {
-  if (e.target === fondoModal) fondoModal.classList.remove('activo');
-});
+if (cerrarModal && fondoModal) {
+  cerrarModal.addEventListener('click', () => fondoModal.classList.remove('activo'));
+}
+if (fondoModal) {
+  fondoModal.addEventListener('click', (e) => {
+    if (e.target === fondoModal) fondoModal.classList.remove('activo');
+  });
+}
 
 // Cambiar entre tabs
-tabLogin.addEventListener('click', () => {
-  tabLogin.classList.add('activo');
-  tabRegistro.classList.remove('activo');
-  formLogin.style.display = 'block';
-  formRegistro.style.display = 'none';
-});
+if (tabLogin && tabRegistro && formLogin && formRegistro) {
+  tabLogin.addEventListener('click', () => {
+    tabLogin.classList.add('activo');
+    tabRegistro.classList.remove('activo');
+    formLogin.style.display = 'block';
+    formRegistro.style.display = 'none';
+  });
 
-tabRegistro.addEventListener('click', () => {
-  tabRegistro.classList.add('activo');
-  tabLogin.classList.remove('activo');
-  formRegistro.style.display = 'block';
-  formLogin.style.display = 'none';
-});
+  tabRegistro.addEventListener('click', () => {
+    tabRegistro.classList.add('activo');
+    tabLogin.classList.remove('activo');
+    formRegistro.style.display = 'block';
+    formLogin.style.display = 'none';
+  });
+}
 
 // Login
-document.getElementById('btn-login').addEventListener('click', async () => {
+const btnLogin = document.getElementById('btn-login');
+if (btnLogin) {
+  btnLogin.addEventListener('click', async () => {
   const email = document.getElementById('login-email').value;
   const password = document.getElementById('login-password').value;
   const errorEl = document.getElementById('error-login');
@@ -239,10 +267,13 @@ document.getElementById('btn-login').addEventListener('click', async () => {
   } catch (error) {
     errorEl.textContent = 'Error al conectar con el servidor';
   }
-});
+  });
+}
 
 // Registro
-document.getElementById('btn-registro').addEventListener('click', async () => {
+const btnRegistro = document.getElementById('btn-registro');
+if (btnRegistro) {
+  btnRegistro.addEventListener('click', async () => {
   const nombre = document.getElementById('registro-nombre').value;
   const email = document.getElementById('registro-email').value;
   const password = document.getElementById('registro-password').value;
@@ -271,13 +302,14 @@ document.getElementById('btn-registro').addEventListener('click', async () => {
   } catch (error) {
     errorEl.textContent = 'Error al conectar con el servidor';
   }
-});
+  });
+}
 
 // Mantener sesión activa al recargar la página
 window.addEventListener('load', () => {
   const usuario = JSON.parse(localStorage.getItem('usuario'));
   if (usuario) {
-    nombreUsuarioSpan.textContent = usuario.nombre;
+    if (nombreUsuarioSpan) nombreUsuarioSpan.textContent = usuario.nombre;
   }
   const carritoGuardado = JSON.parse(localStorage.getItem('carrito') || '[]');
   if (Array.isArray(carritoGuardado)) {
@@ -288,7 +320,9 @@ window.addEventListener('load', () => {
 
 
 // --- BOTÓN PAGAR ---
-document.getElementById('btn-pagar').addEventListener('click', async () => {
+const btnPagar = document.getElementById('btn-pagar');
+if (btnPagar) {
+  btnPagar.addEventListener('click', async () => {
   const token = localStorage.getItem('token');
 
   // Verificar que el usuario esté logueado
@@ -343,7 +377,8 @@ document.getElementById('btn-pagar').addEventListener('click', async () => {
   } catch (error) {
     alert('Error al conectar con el servidor');
   }
-});
+  });
+}
 
 // --- FILTRADO DEL MENÚ ---
 document.addEventListener('click', async (e) => {
